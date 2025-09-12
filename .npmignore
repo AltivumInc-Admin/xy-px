@@ -1,6 +1,12 @@
 # Source files
 src/
 demo/
+docs/
+
+# CRITICAL: Ensure demo NEVER gets into package
+demo/**
+*.html
+vite.config.*
 
 # Config files
 rollup.config.js
@@ -44,3 +50,9 @@ __tests__/
 
 # Keep only dist folder and essential files
 # dist/ folder is included by default via "files" in package.json
+
+# Extra safety: explicitly exclude anything that could serve a demo
+scripts/
+**/*.html
+**/demo.*
+**/Demo.*
