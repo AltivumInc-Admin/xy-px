@@ -8,15 +8,18 @@ const command = process.argv[2];
 
 // Handle uninstall
 if (command === 'uninstall' || command === 'remove') {
-  console.log('\n🧹 Removing xy-px...\n');
+  console.log('\n\x1b[36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\x1b[0m');
+console.log('\x1b[1m\x1b[36m🧹 Removing xy-px...\x1b[0m\n');
   removeXYPX();
   execSync('npm uninstall xy-px', { stdio: 'inherit' });
-  console.log('\n✅ xy-px has been removed\n');
+  console.log('\n\x1b[1m\x1b[32m✅ xy-px has been removed cleanly!\x1b[0m\n');
+console.log('\x1b[36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\x1b[0m\n');
   process.exit(0);
 }
 
 // Install/setup flow
-console.log('\n📍 Setting up xy-px cursor tracker...\n');
+console.log('\n\x1b[36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\x1b[0m');
+console.log('\x1b[1m\x1b[36m📍 Setting up xy-px cursor tracker...\x1b[0m\n');
 
 const projectRoot = process.cwd();
 
@@ -63,8 +66,10 @@ for (const entry of possibleEntries) {
 }
 
 if (!entryFile) {
-  console.log('⚠️  Could not find entry file. Please add this import manually to your main file:');
-  console.log('\n   import \'xy-px\';\n');
+  console.log('\n\x1b[33m⚠️  Could not find your app\'s entry file automatically.\x1b[0m\n');
+  console.log('\x1b[1mPlease add this line to your main file (e.g., src/main.tsx):\x1b[0m\n');
+  console.log('   \x1b[32mimport \'xy-px\';\x1b[0m\n');
+  console.log('\x1b[90mCommon entry files: src/main.tsx, src/index.tsx, src/App.tsx\x1b[0m\n');
   process.exit(0);
 }
 
@@ -98,13 +103,14 @@ if (!inserted) {
 content = lines.join('\n');
 fs.writeFileSync(entryFile, content);
 
-console.log('✅ xy-px has been set up successfully!\n');
-console.log('🎯 Quick Guide:');
-console.log('   • Tracker is now active in your app');
-console.log('   • Press Ctrl+Shift+C (Cmd+Shift+C on Mac) to toggle visibility');
-console.log('   • Hold Alt/Option for cursor-following display');
-console.log('   • Click to copy coordinates\n');
-console.log('💡 To remove: npx xy-px uninstall\n');
+console.log('\x1b[1m\x1b[32m✅ xy-px has been activated!\x1b[0m\n');
+console.log('\x1b[1m🎯 Quick Guide:\x1b[0m');
+console.log('   • \x1b[32m✓\x1b[0m Tracker is now active in your app');
+console.log('   • \x1b[36mPress\x1b[0m \x1b[1mCtrl+Shift+C\x1b[0m (\x1b[1mCmd+Shift+C\x1b[0m on Mac) to toggle');
+console.log('   • \x1b[36mHold\x1b[0m \x1b[1mAlt/Option\x1b[0m for cursor-following display');
+console.log('   • \x1b[36mClick\x1b[0m to copy coordinates\n');
+console.log('\x1b[90m💡 To remove later: \x1b[0mnpx xy-px uninstall\n');
+console.log('\x1b[36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\x1b[0m\n');
 
 function removeXYPX() {
   const possibleEntries = [
