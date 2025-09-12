@@ -1,6 +1,6 @@
 {
   "name": "xy-px",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React cursor coordinates tracker for precise LLM communication. Perfect for AI-assisted development with ChatGPT, Claude, and Copilot. Features real-time display, cross-platform support, and instant copy-paste.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
