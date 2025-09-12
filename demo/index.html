@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursor Coordinates Tool - Demo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+      color: white;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-align: center;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    
+    .subtitle {
+      text-align: center;
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 60px;
+    }
+    
+    .demo-section {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .icon {
+      font-size: 1.5rem;
+    }
+    
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    
+    .control-group {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .control-group h3 {
+      font-size: 1rem;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.8;
+    }
+    
+    label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    
+    label:hover {
+      opacity: 0.8;
+    }
+    
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    
+    select {
+      width: 100%;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    
+    select option {
+      background: #333;
+    }
+    
+    input[type="range"] {
+      width: 100%;
+      margin-top: 10px;
+    }
+    
+    .range-value {
+      text-align: center;
+      margin-top: 5px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    
+    .keyboard-hint {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    kbd {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-family: monospace;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+    }
+    
+    .scroll-area {
+      height: 300px;
+      overflow-y: auto;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    
+    .scroll-content {
+      height: 800px;
+      background: linear-gradient(180deg, 
+        rgba(255, 255, 255, 0.1) 0%, 
+        rgba(255, 255, 255, 0.05) 50%, 
+        rgba(255, 255, 255, 0.1) 100%
+      );
+      border-radius: 10px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+    
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 30px;
+    }
+    
+    .feature {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    
+    .feature-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .feature-desc {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 Cursor Coordinates Tool</h1>
+    <p class="subtitle">A powerful development tool for tracking cursor position, viewport coordinates, and scroll position</p>
+    
+    <div class="demo-section">
+      <h2><span class="icon">⚙️</span> Live Configuration</h2>
+      <p>Customize the tool's behavior in real-time. All changes are applied instantly!</p>
+      
+      <div class="controls">
+        <div class="control-group">
+          <h3>Display Options</h3>
+          <label>
+            <input type="checkbox" id="showViewport" checked>
+            <span>Show Viewport Coordinates</span>
+          </label>
+          <label>
+            <input type="checkbox" id="showPage" checked>
+            <span>Show Page Coordinates</span>
+          </label>
+          <label>
+            <input type="checkbox" id="showScroll" checked>
+            <span>Show Scroll Position</span>
+          </label>
+          <label>
+            <input type="checkbox" id="enableAlt" checked>
+            <span>Enable Alt Tracking</span>
+          </label>
+          <label>
+            <input type="checkbox" id="enableCopy" checked>
+            <span>Enable Copy on Click</span>
+          </label>
+        </div>
+        
+        <div class="control-group">
+          <h3>Position</h3>
+          <select id="position">
+            <option value="top-right">Top Right</option>
+            <option value="top-left">Top Left</option>
+            <option value="bottom-right">Bottom Right</option>
+            <option value="bottom-left">Bottom Left</option>
+          </select>
+        </div>
+        
+        <div class="control-group">
+          <h3>Theme</h3>
+          <select id="theme">
+            <option value="auto">Auto</option>
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+          </select>
+        </div>
+        
+        <div class="control-group">
+          <h3>Opacity</h3>
+          <input type="range" id="opacity" min="10" max="100" value="40">
+          <div class="range-value"><span id="opacityValue">40</span>%</div>
+        </div>
+      </div>
+      
+      <div class="keyboard-hint">
+        Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> to toggle visibility
+      </div>
+    </div>
+    
+    <div class="demo-section">
+      <h2><span class="icon">✨</span> Features</h2>
+      <div class="feature-grid">
+        <div class="feature">
+          <div class="feature-icon">📍</div>
+          <div class="feature-title">Real-time Tracking</div>
+          <div class="feature-desc">Updates instantly as you move</div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📋</div>
+          <div class="feature-title">Copy Coordinates</div>
+          <div class="feature-desc">Alt + Click to copy position</div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🎨</div>
+          <div class="feature-title">Customizable</div>
+          <div class="feature-desc">Themes, position, opacity</div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">⌨️</div>
+          <div class="feature-title">Keyboard Shortcuts</div>
+          <div class="feature-desc">Quick toggle & controls</div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📏</div>
+          <div class="feature-title">Multiple Metrics</div>
+          <div class="feature-desc">Viewport, page, scroll data</div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">💾</div>
+          <div class="feature-title">Persistent Settings</div>
+          <div class="feature-desc">Remembers your preferences</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="demo-section">
+      <h2><span class="icon">📜</span> Scroll Test Area</h2>
+      <p>Test the scroll position tracking in this scrollable area:</p>
+      <div class="scroll-area">
+        <div class="scroll-content">
+          <div>
+            <p>Scroll down to see the scroll position update!</p>
+            <p style="margin-top: 20px;">↓ Keep scrolling ↓</p>
+            <p style="margin-top: 200px;">You're doing great!</p>
+            <p style="margin-top: 200px;">Almost at the bottom...</p>
+            <p style="margin-top: 200px;">You made it! 🎉</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="demo-section">
+      <h2><span class="icon">🚀</span> Getting Started</h2>
+      <p>Move your cursor around the page and watch the coordinates update in real-time!</p>
+      <ul style="margin-top: 20px; margin-left: 20px; line-height: 1.8;">
+        <li>Hold <kbd>Alt</kbd> to see cursor-following display</li>
+        <li><kbd>Alt</kbd> + <kbd>Click</kbd> to copy coordinates to clipboard</li>
+        <li>Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> to toggle visibility</li>
+        <li>Hover over the HUD to increase opacity temporarily</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div id="cursor-tool"></div>
+  
+  <script type="module" src="./demo.tsx"></script>
+</body>
+</html>

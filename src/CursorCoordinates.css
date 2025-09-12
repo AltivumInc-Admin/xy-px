@@ -1,0 +1,380 @@
+/* Base styles for Corner HUD Display */
+.cursor-coords-hud {
+  position: fixed;
+  background: linear-gradient(135deg, 
+    rgba(15, 23, 42, 0.8) 0%, 
+    rgba(30, 41, 59, 0.6) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(147, 197, 253, 0.1);
+  border-radius: 12px;
+  padding: 12px 16px;
+  z-index: 9999;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+  font-size: 11px;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  animation: coords-fade-in 0.3s ease-out;
+}
+
+/* Position variants */
+.cursor-coords-position-top-right {
+  top: 20px;
+  right: 20px;
+}
+
+.cursor-coords-position-top-left {
+  top: 20px;
+  left: 20px;
+}
+
+.cursor-coords-position-bottom-right {
+  bottom: 20px;
+  right: 20px;
+}
+
+.cursor-coords-position-bottom-left {
+  bottom: 20px;
+  left: 20px;
+}
+
+/* Hover state */
+.cursor-coords-hud:hover {
+  opacity: 0.9 !important;
+}
+
+/* Coordinate display rows */
+.cursor-coords-hud > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 2px 0;
+  color: rgba(226, 232, 240, 0.8);
+}
+
+/* Labels */
+.coord-label {
+  color: rgba(148, 163, 184, 0.6);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 35px;
+}
+
+/* Values */
+.coord-value {
+  color: rgba(147, 197, 253, 0.9);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.5px;
+}
+
+/* Color coding for different coordinate types */
+.coords-viewport .coord-value {
+  color: rgba(147, 197, 253, 0.7);
+}
+
+.coords-page .coord-value {
+  color: rgba(94, 234, 212, 0.7);
+}
+
+.coords-scroll .coord-value {
+  color: rgba(251, 191, 36, 0.7);
+}
+
+/* Hint section */
+.coords-hint {
+  margin-top: 8px !important;
+  padding-top: 8px;
+  border-top: 1px solid rgba(147, 197, 253, 0.1);
+  font-size: 10px;
+  color: rgba(148, 163, 184, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Platform toggle button */
+.coords-platform-toggle {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(51, 65, 85, 0.3);
+  border: 1px solid rgba(147, 197, 253, 0.2);
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  pointer-events: all;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.coords-platform-toggle:hover {
+  background: rgba(51, 65, 85, 0.5);
+  border-color: rgba(147, 197, 253, 0.4);
+  transform: scale(1.1);
+}
+
+.coords-platform-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Light theme platform toggle */
+.cursor-coords-theme-light .coords-platform-toggle {
+  background: rgba(241, 245, 249, 0.5);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.cursor-coords-theme-light .coords-platform-toggle:hover {
+  background: rgba(241, 245, 249, 0.8);
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.coords-hint kbd {
+  background: rgba(51, 65, 85, 0.5);
+  border: 1px solid rgba(147, 197, 253, 0.2);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(147, 197, 253, 0.8);
+  box-shadow: 
+    0 1px 0 rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Cursor-following display */
+.cursor-coords-follow {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+}
+
+.coords-follow-content {
+  background: linear-gradient(135deg, 
+    rgba(15, 23, 42, 0.95) 0%, 
+    rgba(30, 41, 59, 0.9) 100%
+  );
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(147, 197, 253, 0.3);
+  border-radius: 8px;
+  padding: 8px 12px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(59, 130, 246, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+/* Arrow pointer */
+.coords-follow-content::before {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, 
+    rgba(30, 41, 59, 0.9) 0%, 
+    rgba(15, 23, 42, 0.95) 100%
+  );
+  border-right: 1px solid rgba(147, 197, 253, 0.3);
+  border-bottom: 1px solid rgba(147, 197, 253, 0.3);
+}
+
+.coords-follow-main {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(94, 234, 212, 0.95);
+  letter-spacing: 0.5px;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 10px rgba(94, 234, 212, 0.3);
+}
+
+.coords-follow-hint {
+  font-size: 10px;
+  color: rgba(148, 163, 184, 0.7);
+  margin-top: 2px;
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+
+/* Copy confirmation */
+.cursor-coords-copied {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background: linear-gradient(135deg, 
+    rgba(16, 185, 129, 0.95) 0%, 
+    rgba(5, 150, 105, 0.9) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: white;
+  z-index: 10001;
+  box-shadow: 
+    0 4px 24px rgba(16, 185, 129, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  animation: coords-fade-in 0.2s ease-out;
+}
+
+/* Light theme */
+.cursor-coords-theme-light.cursor-coords-hud {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(241, 245, 249, 0.9) 100%
+  );
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.cursor-coords-theme-light .coord-label {
+  color: rgba(71, 85, 105, 0.7);
+}
+
+.cursor-coords-theme-light .coord-value {
+  color: rgba(59, 130, 246, 1);
+}
+
+.cursor-coords-theme-light .coords-viewport .coord-value {
+  color: rgba(59, 130, 246, 0.9);
+}
+
+.cursor-coords-theme-light .coords-page .coord-value {
+  color: rgba(16, 185, 129, 0.9);
+}
+
+.cursor-coords-theme-light .coords-scroll .coord-value {
+  color: rgba(245, 158, 11, 0.9);
+}
+
+.cursor-coords-theme-light .coords-hint {
+  border-top: 1px solid rgba(59, 130, 246, 0.15);
+  color: rgba(100, 116, 139, 0.7);
+}
+
+.cursor-coords-theme-light .coords-hint kbd {
+  background: rgba(241, 245, 249, 0.8);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: rgba(59, 130, 246, 1);
+  box-shadow: 
+    0 1px 0 rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .cursor-coords-hud {
+    top: 10px;
+    right: 10px;
+    padding: 8px 12px;
+    font-size: 10px;
+  }
+  
+  .cursor-coords-position-top-right {
+    top: 10px;
+    right: 10px;
+  }
+  
+  .cursor-coords-position-top-left {
+    top: 10px;
+    left: 10px;
+  }
+  
+  .cursor-coords-position-bottom-right {
+    bottom: 10px;
+    right: 10px;
+  }
+  
+  .cursor-coords-position-bottom-left {
+    bottom: 10px;
+    left: 10px;
+  }
+  
+  .coord-label {
+    font-size: 9px;
+  }
+  
+  .coords-hint {
+    display: none;
+  }
+}
+
+/* Touch-specific styles for mobile */
+@media (pointer: coarse) {
+  .cursor-coords-follow {
+    /* Adjust position for finger visibility */
+    margin-top: -20px;
+  }
+  
+  .coords-follow-content {
+    padding: 10px 14px;
+    border-radius: 10px;
+  }
+  
+  .coords-follow-main {
+    font-size: 14px;
+  }
+  
+  .coords-follow-hint {
+    font-size: 11px;
+  }
+}
+
+/* Platform-specific adjustments */
+.cursor-coords-hud {
+  position: fixed;
+}
+
+/* Ensure platform toggle is accessible on mobile */
+@media (max-width: 768px) {
+  .coords-platform-toggle {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+}
+
+/* Dark mode enhancements */
+@media (prefers-color-scheme: dark) {
+  .cursor-coords-hud:not(.cursor-coords-theme-light) {
+    background: linear-gradient(135deg, 
+      rgba(10, 14, 39, 0.9) 0%, 
+      rgba(15, 23, 42, 0.8) 100%
+    );
+  }
+}
+
+/* Animations */
+@keyframes coords-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
