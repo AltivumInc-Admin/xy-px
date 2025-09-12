@@ -5,6 +5,7 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const command = process.argv[2];
+const projectRoot = process.cwd();
 
 // Handle uninstall
 if (command === 'uninstall' || command === 'remove') {
@@ -20,8 +21,6 @@ console.log('\x1b[36m━━━━━━━━━━━━━━━━━━━�
 // Install/setup flow
 console.log('\n\x1b[36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\x1b[0m');
 console.log('\x1b[1m\x1b[36m📍 Setting up xy-px cursor tracker...\x1b[0m\n');
-
-const projectRoot = process.cwd();
 
 // Find package.json
 const packageJsonPath = path.join(projectRoot, 'package.json');
@@ -119,14 +118,34 @@ function removeXYPX() {
     'src/App.tsx', 'src/App.ts', 'src/App.jsx', 'src/App.js'
   ];
 
+  let removedFrom = [];
+  
   for (const entry of possibleEntries) {
     const fullPath = path.join(projectRoot, entry);
     if (fs.existsSync(fullPath)) {
       let content = fs.readFileSync(fullPath, 'utf8');
-      // Remove any xy-px imports
-      content = content.replace(/^import\s+['"]xy-px['"];?.*\n/gm, '');
-      content = content.replace(/^import\s+['"]xy-px\/auto['"];?.*\n/gm, '');
-      fs.writeFileSync(fullPath, content);
+      const originalContent = content;
+      
+      // Remove any xy-px imports (handle various formats)
+      content = content.replace(/^import\s+['"]xy-px['"];?\s*(\/\/.*)?$/gm, '');
+      content = content.replace(/^import\s+['"]xy-px\/auto['"];?\s*(\/\/.*)?$/gm, '');
+      content = content.replace(/^import\s+'xy-px';\s*(\/\/.*)?$/gm, '');
+      content = content.replace(/^import\s+"xy-px";\s*(\/\/.*)?$/gm, '');
+      
+      // Also remove any lines that are just the comment left behind
+      content = content.replace(/^\s*\/\/\s*Cursor tracker.*$/gm, '');
+      
+      // Clean up any double newlines left behind
+      content = content.replace(/\n\n\n+/g, '\n\n');
+      
+      if (content !== originalContent) {
+        fs.writeFileSync(fullPath, content);
+        removedFrom.push(entry);
+      }
     }
+  }
+  
+  if (removedFrom.length > 0) {
+    console.log(`   Cleaned imports from: ${removedFrom.join(', ')}`);
   }
 }
