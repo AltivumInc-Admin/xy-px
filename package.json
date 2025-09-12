@@ -1,7 +1,7 @@
 {
   "name": "xy-px",
   "version": "1.0.1",
-  "description": "Cross-platform cursor position tracker with real-time coordinates display, OS-specific key bindings, and mobile touch support for React applications",
+  "description": "React cursor coordinates tracker for precise LLM communication. Perfect for AI-assisted development with ChatGPT, Claude, and Copilot. Features real-time display, cross-platform support, and instant copy-paste.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -37,7 +37,18 @@
     "ios",
     "android",
     "xy",
-    "px"
+    "px",
+    "llm",
+    "ai",
+    "chatgpt",
+    "claude",
+    "copilot",
+    "ai-development",
+    "ai-assisted",
+    "pixel-perfect",
+    "positioning",
+    "ui-development",
+    "developer-tools"
   ],
   "author": "Altivum Inc <admin@altivum.io>",
   "license": "MIT",

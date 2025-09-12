@@ -5,9 +5,20 @@
 [![React](https://img.shields.io/badge/React-17%2B-blue)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0%2B-blue)](https://www.typescriptlang.org/)
 
-A lightweight, cross-platform React component for tracking and displaying cursor/touch coordinates with real-time updates, platform-specific key bindings, and mobile support.
+A lightweight, cross-platform React component for tracking and displaying cursor/touch coordinates with real-time updates, platform-specific key bindings, and mobile support. **Perfect for communicating precise positioning to LLMs like ChatGPT, Claude, and Copilot.**
 
 🚀 **[Live Demo](https://altivuminc-admin.github.io/xy-px/)** | 📦 **[NPM Package](https://www.npmjs.com/package/xy-px)** | 💻 **[GitHub](https://github.com/AltivumInc-Admin/xy-px)**
+
+## 🤖 Perfect for AI-Assisted Development
+
+**XY-PX bridges the gap between visual design and LLM communication.** When working with AI assistants, you can now provide exact coordinates for precise element positioning:
+
+- Tell your LLM: *"Move the button to [245, 380]"* → Get exact CSS positioning
+- Say: *"Place the modal at coordinates X: 450, Y: 200"* → Receive precise transform values
+- Request: *"Center the element at [960, 540]"* → Get perfect centering code
+- Copy coordinates with Alt+Click and paste directly into your AI prompt
+
+This tool transforms vague positioning requests into precise, pixel-perfect implementations when working with AI coding assistants.
 
 ## ✨ Features
 
@@ -182,6 +193,27 @@ The component automatically detects the user's platform and adjusts key bindings
 - 🤖 Android
 
 ## 💡 Examples
+
+### Working with AI/LLM Assistants
+
+```jsx
+<CursorCoordinates 
+  enableCopyOnClick={true}
+  position="top-right"
+/>
+```
+
+**Workflow:**
+1. Hold Alt/Option to see cursor-following display
+2. Alt+Click to copy coordinates
+3. Paste into your AI prompt: "Move the header to [425, 120]"
+4. Get precise positioning code from your LLM
+
+**Example AI Prompts:**
+- "Position the button at exactly [300, 450]"
+- "Create a tooltip that appears at coordinates X: 523, Y: 201"
+- "Align these three elements at Y: 350 with X coordinates [100, 300, 500]"
+- "Draw a line from [50, 100] to [450, 300]"
 
 ### Minimal Setup
 
