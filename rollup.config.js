@@ -10,35 +10,7 @@ import { readFileSync } from 'fs';
 const packageJson = JSON.parse(readFileSync('./package.json', 'utf8'));
 
 export default [
-  // Main library build
-  {
-    input: 'src/index.ts',
-    output: [
-      {
-        file: packageJson.main,
-        format: 'cjs',
-        sourcemap: true,
-      },
-      {
-        file: packageJson.module,
-        format: 'esm',
-        sourcemap: true,
-      },
-    ],
-    plugins: [
-      peerDepsExternal(),
-      resolve(),
-      commonjs(),
-      typescript({ tsconfig: './tsconfig.json' }),
-      postcss({
-        extract: true,
-        minimize: true,
-        modules: false,
-      }),
-      terser(),
-    ],
-  },
-  // Auto-inject build
+  // Auto-inject build (main entry)
   {
     input: 'src/auto-inject.tsx',
     output: [
@@ -60,6 +32,34 @@ export default [
       typescript({ tsconfig: './tsconfig.json' }),
       postcss({
         extract: false, // Inline CSS for auto-inject
+        minimize: true,
+        modules: false,
+      }),
+      terser(),
+    ],
+  },
+  // Component-only build (for manual usage)
+  {
+    input: 'src/index.ts',
+    output: [
+      {
+        file: 'dist/index.js',
+        format: 'cjs',
+        sourcemap: true,
+      },
+      {
+        file: 'dist/index.esm.js',
+        format: 'esm',
+        sourcemap: true,
+      },
+    ],
+    plugins: [
+      peerDepsExternal(),
+      resolve(),
+      commonjs(),
+      typescript({ tsconfig: './tsconfig.json' }),
+      postcss({
+        extract: true,
         minimize: true,
         modules: false,
       }),
