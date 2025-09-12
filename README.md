@@ -7,6 +7,8 @@
 
 A lightweight, cross-platform React component for tracking and displaying cursor/touch coordinates with real-time updates, platform-specific key bindings, and mobile support.
 
+🚀 **[Live Demo](https://altivuminc-admin.github.io/xy-px/)** | 📦 **[NPM Package](https://www.npmjs.com/package/xy-px)** | 💻 **[GitHub](https://github.com/AltivumInc-Admin/xy-px)**
+
 ## ✨ Features
 
 - 🎯 **Real-time Tracking** - Display viewport and page coordinates as you move
