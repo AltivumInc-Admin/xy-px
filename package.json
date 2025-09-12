@@ -1,6 +1,6 @@
 {
   "name": "xy-px",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cross-platform cursor position tracker with real-time coordinates display, OS-specific key bindings, and mobile touch support for React applications",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
