@@ -5,8 +5,22 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./auto": {
+      "import": "./dist/auto-inject.esm.js",
+      "require": "./dist/auto-inject.js",
+      "types": "./dist/auto-inject.d.ts"
+    },
+    "./dist/index.css": "./dist/index.css"
+  },
   "files": [
-    "dist"
+    "dist",
+    "scripts/postinstall.js"
   ],
   "scripts": {
     "build": "rollup -c",
@@ -17,7 +31,8 @@
     "demo": "vite demo",
     "demo:build": "vite build demo",
     "prepublishOnly": "npm run build && npm run verify-package",
-    "verify-package": "node scripts/verify-package.js"
+    "verify-package": "node scripts/verify-package.js",
+    "postinstall": "node scripts/postinstall.js"
   },
   "keywords": [
     "react",
