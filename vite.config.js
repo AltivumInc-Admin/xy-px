@@ -5,6 +5,7 @@ import path from 'path';
 export default defineConfig({
   plugins: [react()],
   root: 'demo',
+  base: '/xy-px/',
   resolve: {
     alias: {
       '../src': path.resolve(__dirname, './src'),
@@ -15,6 +16,6 @@ export default defineConfig({
     open: true,
   },
   build: {
-    outDir: '../dist-demo',
+    outDir: '../docs',
   },
 });

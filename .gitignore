@@ -10,6 +10,8 @@ lerna-debug.log*
 dist/
 dist-demo/
 *.tsbuildinfo
+# Keep docs for GitHub Pages
+!docs/
 
 # IDE
 .vscode/
