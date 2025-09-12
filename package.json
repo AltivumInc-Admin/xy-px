@@ -1,7 +1,7 @@
 {
-  "name": "cursor-coordinates-tool",
+  "name": "xy-px",
   "version": "1.0.0",
-  "description": "A customizable React component for displaying cursor coordinates, scroll position, and viewport information",
+  "description": "Cross-platform cursor position tracker with real-time coordinates display, OS-specific key bindings, and mobile touch support for React applications",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -28,13 +28,22 @@
     "development",
     "tool",
     "viewport",
-    "scroll"
+    "scroll",
+    "cross-platform",
+    "touch",
+    "mobile",
+    "macos",
+    "windows",
+    "ios",
+    "android",
+    "xy",
+    "px"
   ],
-  "author": "",
+  "author": "Altivum Inc <admin@altivum.io>",
   "license": "MIT",
   "peerDependencies": {
-    "react": "^17.0.0 || ^18.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0"
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.0",
@@ -64,10 +73,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/cursor-coordinates-tool.git"
+    "url": "git+https://github.com/AltivumInc-Admin/xy-px.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/cursor-coordinates-tool/issues"
+    "url": "https://github.com/AltivumInc-Admin/xy-px/issues"
   },
-  "homepage": "https://github.com/yourusername/cursor-coordinates-tool#readme"
+  "homepage": "https://github.com/AltivumInc-Admin/xy-px#readme"
 }

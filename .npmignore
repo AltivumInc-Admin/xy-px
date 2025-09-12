@@ -1,0 +1,46 @@
+# Source files
+src/
+demo/
+
+# Config files
+rollup.config.js
+tsconfig.json
+vite.config.js
+.eslintrc*
+.prettierrc*
+
+# Development files
+*.log
+.DS_Store
+node_modules/
+coverage/
+.nyc_output/
+
+# Git files
+.git/
+.gitignore
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Documentation source
+*.md
+!README.md
+
+# Test files
+__tests__/
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# CI/CD
+.github/
+.travis.yml
+.circleci/
+
+# Keep only dist folder and essential files
+# dist/ folder is included by default via "files" in package.json
