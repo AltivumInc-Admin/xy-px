@@ -72,6 +72,7 @@ export const CursorCoordinates: React.FC<CursorCoordinatesProps> = ({
     platform === 'auto' ? 'windows' : platform
   );
   const [isTouchActive, setIsTouchActive] = useState(false);
+  const [showInfoPopup, setShowInfoPopup] = useState(false);
   const touchTimerRef = useRef<NodeJS.Timeout>();
   const platformInfo = getPlatformInfo(currentPlatform);
   const actualToggleShortcut = toggleShortcut || platformInfo.toggleShortcut;
@@ -198,6 +199,10 @@ export const CursorCoordinates: React.FC<CursorCoordinatesProps> = ({
     const savedVisible = localStorage.getItem('cursorCoords.visible');
     if (savedVisible !== null) {
       setShowCoords(savedVisible === 'true');
+    } else {
+      // Default to visible and save preference
+      setShowCoords(true);
+      localStorage.setItem('cursorCoords.visible', 'true');
     }
     
     const savedPlatform = localStorage.getItem('cursorCoords.platform');
@@ -286,7 +291,7 @@ export const CursorCoordinates: React.FC<CursorCoordinatesProps> = ({
           </div>
         )}
         {showPlatformToggle && (
-          <button 
+          <button
             className="coords-platform-toggle"
             onClick={togglePlatform}
             title={`Current: ${platformInfo.platform}. Click to switch.`}
@@ -294,6 +299,28 @@ export const CursorCoordinates: React.FC<CursorCoordinatesProps> = ({
           >
             {platformInfo.platformIcon}
           </button>
+        )}
+        <button
+          className="coords-info-button"
+          onClick={() => setShowInfoPopup(!showInfoPopup)}
+          title="Important information"
+          aria-label="Show info"
+        >
+          i
+        </button>
+        {showInfoPopup && (
+          <div className="coords-info-popup">
+            <div className="coords-info-content">
+              <strong>Note:</strong> When uninstalling xy-px, remember to also remove the import statement from your code.
+              <button
+                className="coords-info-close"
+                onClick={() => setShowInfoPopup(false)}
+                aria-label="Close info"
+              >
+                ×
+              </button>
+            </div>
+          </div>
         )}
       </div>
       
