@@ -370,8 +370,8 @@
 /* Info button styles */
 .coords-info-button {
   position: absolute;
-  top: 8px;
-  left: 8px;
+  top: 40px;
+  right: 8px;
   background: rgba(59, 130, 246, 0.15);
   border: 1px solid rgba(147, 197, 253, 0.3);
   border-radius: 50%;
@@ -405,8 +405,8 @@
 /* Info popup */
 .coords-info-popup {
   position: absolute;
-  top: 35px;
-  left: 8px;
+  top: 65px;
+  right: 8px;
   background: linear-gradient(135deg,
     rgba(15, 23, 42, 0.98) 0%,
     rgba(30, 41, 59, 0.95) 100%
