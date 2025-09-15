@@ -31,7 +31,7 @@
   "files": [
     "dist",
     "bin",
-    "scripts/show-setup-prompt.js"
+    "scripts/postinstall.js"
   ],
   "bin": {
     "xy-px": "./bin/init.js"
@@ -46,7 +46,7 @@
     "demo:build": "vite build demo",
     "prepublishOnly": "npm run build && npm run verify-package",
     "verify-package": "node scripts/verify-package.js",
-    "postinstall": "node scripts/show-setup-prompt.js"
+    "postinstall": "node scripts/postinstall.js"
   },
   "keywords": [
     "react",
