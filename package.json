@@ -1,7 +1,7 @@
 {
   "name": "xy-px",
   "version": "1.2.4",
-  "description": "React cursor coordinates tracker for precise LLM communication. Perfect for AI-assisted development with ChatGPT, Claude, and Copilot. Features real-time display, cross-platform support, and instant copy-paste.",
+  "description": "Stop describing pixels to your AI. Just point and click. XY-PX auto-injects pixel-perfect coordinates into your React app for seamless AI pair programming with ChatGPT, Claude, Cursor & Copilot. Zero config. Alt+Click to copy. Ship faster.",
   "main": "dist/auto-inject.js",
   "module": "dist/auto-inject.esm.js",
   "types": "dist/index.d.ts",
